@@ -209,7 +209,7 @@ def mark_cut_qrcode(image:Image, polygons_dic:dict, filename=None):
     marked_image.save(Path(filename).stem + "_marked"+ Path(filename).suffix)
 
 
-pis =[]
+# sort polygons according to the rules: from left to right,from top to bottom
 def polygon_sort(polygons:list):
     print(list(polygons))
     sorted_polygons = []
@@ -232,8 +232,6 @@ def polygon_sort(polygons:list):
     #print(sorted_first_point)
     sorted_first_point = sortd(sorted_first_point)
     #print(sorted_first_point)
-    global pis
-    pis = sorted_first_point
     i = 0
     for point in sorted_first_point:
         item = list(filter(lambda x: polygons_dic[x][0][0] == point, polygons_dic))
@@ -243,7 +241,7 @@ def polygon_sort(polygons:list):
     print(list(sorted_polygons))
     return sorted_polygons
 
-
+# sort polygons according to the rules: from left to right,from top to bottom
 def sortd(Array, scalar = 1):
     y = Array[0][1]
     line1 = list(filter(lambda x: abs(x[1] - y) < 50/scalar, Array))
